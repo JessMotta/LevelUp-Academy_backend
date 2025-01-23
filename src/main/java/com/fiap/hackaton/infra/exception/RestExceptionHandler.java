@@ -1,9 +1,6 @@
 package com.fiap.hackaton.infra.exception;
 
-import com.fiap.hackaton.domain.exceptions.CredentialsException;
-import com.fiap.hackaton.domain.exceptions.DataException;
-import com.fiap.hackaton.domain.exceptions.ExceptionDTO;
-import com.fiap.hackaton.domain.exceptions.ImageException;
+import com.fiap.hackaton.domain.exceptions.*;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -58,7 +55,7 @@ public class RestExceptionHandler {
         return ResponseEntity.badRequest().body(
                 new ExceptionDTO(
                         ex.getMessage(),
-                        HttpStatus.BAD_REQUEST
+                        HttpStatus.CONFLICT
                 )
         );
     }
@@ -74,14 +71,25 @@ public class RestExceptionHandler {
         );
     }
 
-//    @ExceptionHandler(Exception.class)
-//    protected ResponseEntity<ExceptionDTO> handleException(Exception ex) {
-//        log.error("Internal server error");
-//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-//                new ExceptionDTO(
-//                        ex.getMessage(),
-//                        HttpStatus.INTERNAL_SERVER_ERROR
-//                )
-//        );
-//    }
+    @ExceptionHandler(EmailDuplicate.class)
+    protected ResponseEntity<ExceptionDTO> handleEmailDuplicate(EmailDuplicate ex) {
+        log.warn("Email duplicate");
+        return ResponseEntity.badRequest().body(
+                new ExceptionDTO(
+                        ex.getMessage(),
+                        HttpStatus.CONFLICT
+                )
+        );
+    }
+
+    @ExceptionHandler(Exception.class)
+    protected ResponseEntity<ExceptionDTO> handleException(Exception ex) {
+        log.error("Internal server error");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                new ExceptionDTO(
+                        ex.getMessage(),
+                        HttpStatus.INTERNAL_SERVER_ERROR
+                )
+        );
+    }
 }

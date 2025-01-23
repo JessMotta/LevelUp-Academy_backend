@@ -6,6 +6,7 @@ import com.fiap.hackaton.domain.dto.user.UserResponse;
 import com.fiap.hackaton.domain.entity.User;
 import com.fiap.hackaton.domain.enums.Roles;
 import com.fiap.hackaton.domain.exceptions.CredentialsException;
+import com.fiap.hackaton.domain.exceptions.EmailDuplicate;
 import com.fiap.hackaton.repository.UserRepository;
 import com.fiap.hackaton.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
@@ -13,6 +14,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -23,10 +26,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Long save(UserRequest request) {
+
+        Optional<User> userFound = this.repository.findByEmail(request.email());
+        if (userFound.isPresent()) {
+            log.error("[UserServiceImpl] Usuário com email: {} já cadastrado", request.email());
+            throw new EmailDuplicate("Usuário já cadastrado");
+        }
+
         log.info("[UserServiceImpl] Recebendo dados para salvar um novo usuário: {}", request);
         User user = new User(request);
+
         this.repository.save(user);
         log.info("[UserServiceImpl] Usuário salvo com sucesso com ID: {}", user.getId());
+
         return user.getId();
     }
 
@@ -35,7 +47,7 @@ public class UserServiceImpl implements UserService {
         log.info("[UserServiceImpl] Buscando usuário com ID: {}", id);
         return this.repository.findById(id)
                 .orElseThrow(() -> {
-                    log.error("[Service] Usuário com ID: {} não encontrado", id);
+                    log.error("[UserServiceImpl] Usuário com ID: {} não encontrado", id);
                     return new EntityNotFoundException("Usuário não encontrado");
                 });
     }
@@ -52,6 +64,13 @@ public class UserServiceImpl implements UserService {
     public Long update(Long id, UserRequest request) {
         log.info("[UserServiceImpl] Atualizando usuário com ID: {}", id);
         User user = this.findUserEntityById(id);
+
+        Optional<User> userFound = this.repository.findByEmail(request.email());
+        if (userFound.isPresent()) {
+            log.error("[UserServiceImpl] Usuário com email: {} já cadastrado", request.email());
+            throw new EmailDuplicate("Usuário já cadastrado");
+        }
+
         user.update(request);
         this.repository.save(user);
         log.info("[UserServiceImpl] Usuário com ID: {} atualizado com sucesso", id);
@@ -64,7 +83,7 @@ public class UserServiceImpl implements UserService {
         User user = this.repository.findByEmail(login.email())
                 .orElseThrow(() -> {
                     log.error("[UserServiceImpl] Usuário com email: {} não encontrado", login.email());
-                    return new EntityNotFoundException("Usuário não encontrado");
+                    return new EntityNotFoundException("Email ou senha inválida");
                 });
 
         if (!user.getPassword().equals(login.password())) {
