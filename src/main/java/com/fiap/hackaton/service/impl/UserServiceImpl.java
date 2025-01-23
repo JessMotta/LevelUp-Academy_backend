@@ -5,6 +5,7 @@ import com.fiap.hackaton.domain.dto.user.UserRequest;
 import com.fiap.hackaton.domain.dto.user.UserResponse;
 import com.fiap.hackaton.domain.entity.User;
 import com.fiap.hackaton.domain.enums.Roles;
+import com.fiap.hackaton.domain.exceptions.CredentialsException;
 import com.fiap.hackaton.repository.UserRepository;
 import com.fiap.hackaton.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
@@ -68,7 +69,7 @@ public class UserServiceImpl implements UserService {
 
         if (!user.getPassword().equals(login.password())) {
             log.error("[UserServiceImpl] Senha incorreta para o email: {}", login.email());
-            throw new RuntimeException("Email ou senha inválida");
+            throw new CredentialsException("Email ou senha inválida");
         }
 
         log.info("[UserServiceImpl] Login realizado com sucesso para o email: {}", login.email());

@@ -1,5 +1,6 @@
 package com.fiap.hackaton.service.impl;
 
+import com.fiap.hackaton.domain.exceptions.ImageException;
 import com.fiap.hackaton.service.ImageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,7 +39,7 @@ public class ImageServiceImpl implements ImageService {
             return filePath.getFileName().toString();
         } catch (Exception e) {
             log.error("[ImageServiceImpl] Erro ao fazer upload da imagem", e);
-            throw new RuntimeException("Erro ao fazer upload da imagem", e);
+            throw new ImageException("Erro ao fazer upload da imagem");
         }
     }
 
@@ -53,13 +54,13 @@ public class ImageServiceImpl implements ImageService {
 
             if (!resource.exists() || !resource.isReadable()) {
                 log.error("[ImageServiceImpl] Erro ao ler o arquivo");
-                throw new RuntimeException("Erro ao ler o arquivo");
+                throw new ImageException("Erro ao ler o arquivo");
             }
 
             return resource;
         } catch (Exception e) {
             log.error("[ImageServiceImpl] Erro ao ler o arquivo", e);
-            throw new RuntimeException("Erro ao ler o arquivo", e);
+            throw new ImageException("Erro ao ler o arquivo");
         }
     }
 }

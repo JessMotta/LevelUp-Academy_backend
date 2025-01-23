@@ -10,6 +10,7 @@ import com.fiap.hackaton.service.ActivityService;
 import com.fiap.hackaton.service.ClassroomService;
 import com.fiap.hackaton.service.ImageService;
 import com.fiap.hackaton.service.StudentService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -52,7 +53,7 @@ public class ActivityServiceImpl implements ActivityService {
         return this.repository.findById(id)
                 .orElseThrow(() -> {
                     log.error("[ActivityServiceImpl] Atividade com ID: {} não encontrada", id);
-                    return new RuntimeException("Activity not found");
+                    return new EntityNotFoundException("Activity not found");
                 });
     }
 
@@ -92,7 +93,6 @@ public class ActivityServiceImpl implements ActivityService {
         activity.setValueReceived(valueReceived);
 
         student.verifyPatent();
-
     }
 
     @Override

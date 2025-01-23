@@ -10,6 +10,7 @@ import com.fiap.hackaton.repository.ClassroomRepository;
 import com.fiap.hackaton.service.ClassroomService;
 import com.fiap.hackaton.service.StudentService;
 import com.fiap.hackaton.service.TeacherService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -53,12 +54,8 @@ public class ClassroomServiceImpl implements ClassroomService {
     @Override
     public ClassroomDetails findClassroomById(Long id) {
         log.info("[ClassroomServiceImpl] Buscando detalhes da turma com ID: {}", id);
-        return this.repository.findById(id)
-                .map(ClassroomDetails::new)
-                .orElseThrow(() -> {
-                    log.error("[ClassroomServiceImpl] Turma com ID: {} não encontrada", id);
-                    return new RuntimeException("Classroom not found");
-                });
+        Classroom classroom = this.findClassroomEntityById(id);
+        return new ClassroomDetails(classroom);
     }
 
     @Override
@@ -67,7 +64,7 @@ public class ClassroomServiceImpl implements ClassroomService {
         return this.repository.findById(id)
                 .orElseThrow(() -> {
                     log.error("[ClassroomServiceImpl] Turma com ID: {} não encontrada", id);
-                    return new RuntimeException("Classroom not found");
+                    return new EntityNotFoundException("Classroom not found");
                 });
     }
 

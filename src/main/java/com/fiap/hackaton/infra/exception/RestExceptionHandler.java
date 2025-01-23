@@ -1,7 +1,9 @@
 package com.fiap.hackaton.infra.exception;
 
+import com.fiap.hackaton.domain.exceptions.CredentialsException;
 import com.fiap.hackaton.domain.exceptions.DataException;
 import com.fiap.hackaton.domain.exceptions.ExceptionDTO;
+import com.fiap.hackaton.domain.exceptions.ImageException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -42,6 +44,28 @@ public class RestExceptionHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     protected ResponseEntity<ExceptionDTO> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
         log.warn("Data integrity violation");
+        return ResponseEntity.badRequest().body(
+                new ExceptionDTO(
+                        ex.getMessage(),
+                        HttpStatus.BAD_REQUEST
+                )
+        );
+    }
+
+    @ExceptionHandler(CredentialsException.class)
+    protected ResponseEntity<ExceptionDTO> handleCredentialsException(CredentialsException ex) {
+        log.warn("Credentials exception");
+        return ResponseEntity.badRequest().body(
+                new ExceptionDTO(
+                        ex.getMessage(),
+                        HttpStatus.BAD_REQUEST
+                )
+        );
+    }
+
+    @ExceptionHandler(ImageException.class)
+    protected ResponseEntity<ExceptionDTO> handleImageException(ImageException ex) {
+        log.warn("Image exception");
         return ResponseEntity.badRequest().body(
                 new ExceptionDTO(
                         ex.getMessage(),

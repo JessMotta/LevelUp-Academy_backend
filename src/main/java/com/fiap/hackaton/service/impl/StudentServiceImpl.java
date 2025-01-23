@@ -9,6 +9,7 @@ import com.fiap.hackaton.domain.enums.Roles;
 import com.fiap.hackaton.repository.StudentRepository;
 import com.fiap.hackaton.service.StudentService;
 import com.fiap.hackaton.service.UserService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -85,7 +86,7 @@ public class StudentServiceImpl implements StudentService {
         Student student = this.repository.findById(id)
                 .orElseThrow(() -> {
                     log.error("[StudentServiceImpl] Estudante com ID: {} não encontrado", id);
-                    return new RuntimeException("Estudante não encontrado");
+                    return new EntityNotFoundException("Estudante não encontrado");
                 });
         log.info("[StudentServiceImpl] Estudante encontrado com ID");
         return student;
