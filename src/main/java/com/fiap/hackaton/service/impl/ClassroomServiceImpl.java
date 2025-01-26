@@ -4,7 +4,6 @@ import com.fiap.hackaton.domain.dto.classroom.ClassroomDetails;
 import com.fiap.hackaton.domain.dto.classroom.ClassroomRequest;
 import com.fiap.hackaton.domain.dto.classroom.ListClassroom;
 import com.fiap.hackaton.domain.entity.Classroom;
-import com.fiap.hackaton.domain.entity.Student;
 import com.fiap.hackaton.domain.entity.Teacher;
 import com.fiap.hackaton.repository.ClassroomRepository;
 import com.fiap.hackaton.service.ClassroomService;

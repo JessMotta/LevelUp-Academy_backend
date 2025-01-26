@@ -1,7 +1,6 @@
 package com.fiap.hackaton.domain.dto.activity;
 
 import com.fiap.hackaton.domain.entity.Activity;
-import org.springframework.core.io.Resource;
 
 public record ActivityResponse(
         Long id,

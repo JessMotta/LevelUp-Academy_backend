@@ -3,7 +3,6 @@ package com.fiap.hackaton.controller;
 import com.fiap.hackaton.domain.dto.classroom.ClassroomDetails;
 import com.fiap.hackaton.domain.dto.classroom.ClassroomRequest;
 import com.fiap.hackaton.domain.dto.classroom.ListClassroom;
-import com.fiap.hackaton.domain.entity.Classroom;
 import com.fiap.hackaton.service.ClassroomService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

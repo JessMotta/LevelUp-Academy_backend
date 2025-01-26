@@ -1,7 +1,6 @@
 package com.fiap.hackaton.domain.dto.teacher;
 
 import com.fiap.hackaton.domain.dto.classroom.ClassroomTeacher;
-import com.fiap.hackaton.domain.entity.Classroom;
 import com.fiap.hackaton.domain.entity.Teacher;
 
 import java.util.List;

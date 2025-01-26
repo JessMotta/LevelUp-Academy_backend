@@ -1,7 +1,6 @@
 package com.fiap.hackaton.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fiap.hackaton.domain.enums.Patents;
 import jakarta.persistence.*;
 import lombok.*;
