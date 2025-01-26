@@ -4,6 +4,7 @@ import com.fiap.hackaton.domain.entity.Activity;
 import org.springframework.core.io.Resource;
 
 public record ActivityResponse(
+        Long id,
         String name,
         String description,
         String type,
@@ -14,6 +15,7 @@ public record ActivityResponse(
 ) {
     public ActivityResponse(Activity activity) {
         this(
+                activity.getId(),
                 activity.getName(),
                 activity.getDescription(),
                 activity.getType().toString(),
