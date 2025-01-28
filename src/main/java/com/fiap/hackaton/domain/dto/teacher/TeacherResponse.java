@@ -16,9 +16,11 @@ public record TeacherResponse(
                 teacher.getId(),
                 teacher.getUser().getName(),
                 teacher.getUser().getEmail(),
-                teacher.getClassrooms()
-                        .stream().map(ClassroomTeacher::new)
+                teacher.getClassrooms() != null
+                        ? teacher.getClassrooms().stream()
+                        .map(ClassroomTeacher::new)
                         .toList()
+                        : List.of()
         );
     }
 }

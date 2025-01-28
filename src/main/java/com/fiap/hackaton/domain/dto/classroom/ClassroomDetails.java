@@ -22,14 +22,18 @@ public record ClassroomDetails(
                 classroom.getDayOfWeek(),
                 classroom.getTimeSpot(),
                 classroom.getTeacher().getUser().getName(),
-                classroom.getStudents()
+                classroom.getStudents() != null
+                        ? classroom.getStudents()
                         .stream()
                         .map(StudentClassroom::new)
-                        .toList(),
-                classroom.getActivities()
+                        .toList()
+                        : List.of(),
+                classroom.getActivities() != null
+                        ? classroom.getActivities()
                         .stream()
                         .map(ActivityClassroom::new)
                         .toList()
+                        : List.of()
         );
     }
 }
