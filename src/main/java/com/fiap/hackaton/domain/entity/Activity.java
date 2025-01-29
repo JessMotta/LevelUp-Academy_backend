@@ -21,21 +21,15 @@ public class Activity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
     private String description;
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private TypeActivity type;
-    @Column(nullable = false)
     private boolean inGroup;
     private Integer studentsPerGroup;
     private String answer;
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private Execution execution;
-    @Column(nullable = false)
     private Integer prestigeValue;
     private Integer valueReceived;
 

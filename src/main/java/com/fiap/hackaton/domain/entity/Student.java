@@ -16,9 +16,7 @@ public class Student {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
     private Integer experiencePoints;
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Patents currentPatent;
 

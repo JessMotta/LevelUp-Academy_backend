@@ -22,11 +22,8 @@ public class Classroom {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String subject;
-    @Column(nullable = false)
     private Integer dayOfWeek;
-    @Column(nullable = false)
     private Integer timeSpot;
 
     @JsonBackReference
