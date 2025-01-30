@@ -164,7 +164,7 @@ class ActivityServiceImplTest {
         activityService.evaluateActivity(activity.getId(), student.getId(), 10);
 
         assertEquals(10, student.getExperiencePoints());
-        assertEquals(10, activity.getValueReceived());
+        assertEquals(10, activity.getExperienceReceived());
         verify(studentService).findStudentEntityById(student.getId());
     }
 

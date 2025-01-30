@@ -58,10 +58,10 @@ class StudentControllerTest {
     public void testCreate() {
         Long userId = 1L;
         StudentResponse studentResponse = new StudentResponse(student);
-        when(studentService.create(userId)).thenReturn(studentResponse);
+        when(studentService.create(userId, "1º Ano A")).thenReturn(studentResponse);
 
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.newInstance();
-        ResponseEntity<StudentResponse> response = studentController.create(userId, uriBuilder);
+        ResponseEntity<StudentResponse> response = studentController.create(userId, "1º Ano A", uriBuilder);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(studentResponse, response.getBody());

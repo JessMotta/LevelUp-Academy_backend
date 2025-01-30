@@ -63,7 +63,7 @@ class StudentServiceImplTest {
             return student;
         }).when(repository).save(any(Student.class));
 
-        StudentResponse response = studentService.create(user.getId());
+        StudentResponse response = studentService.create(user.getId(), "1º Ano A");
 
         assertNotNull(response);
         assertEquals(student.getId(), response.id());
