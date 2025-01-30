@@ -7,6 +7,7 @@ import com.fiap.hackaton.domain.entity.Classroom;
 import com.fiap.hackaton.domain.entity.Student;
 import com.fiap.hackaton.domain.entity.Teacher;
 import com.fiap.hackaton.domain.entity.User;
+import com.fiap.hackaton.domain.enums.DayOfWeek;
 import com.fiap.hackaton.domain.enums.Roles;
 import com.fiap.hackaton.repository.ClassroomRepository;
 import com.fiap.hackaton.service.StudentService;
@@ -55,7 +56,7 @@ class ClassroomServiceImplTest {
 
         classroomRequest = new ClassroomRequest(
                 "Matemática",
-                1,
+                DayOfWeek.SEGUNDA_FEIRA,
                 1
         );
         classroom = new Classroom(classroomRequest);
