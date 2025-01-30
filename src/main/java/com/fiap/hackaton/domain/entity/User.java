@@ -4,18 +4,16 @@ import com.fiap.hackaton.domain.dto.user.UserRequest;
 import com.fiap.hackaton.domain.enums.Roles;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tb_user")
+@Table(name = "t_lvup_user")
 @EqualsAndHashCode(of = "id")
 @Schema(hidden = true)
+@Builder
 public class User {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

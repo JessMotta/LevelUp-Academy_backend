@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tb_student")
+@Table(name = "t_lvup_student")
 @EqualsAndHashCode(of = "id")
 @Builder
 public class Student {

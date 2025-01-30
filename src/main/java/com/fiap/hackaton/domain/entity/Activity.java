@@ -4,17 +4,15 @@ import com.fiap.hackaton.domain.dto.activity.ActivityRequest;
 import com.fiap.hackaton.domain.enums.Execution;
 import com.fiap.hackaton.domain.enums.TypeActivity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tb_activity")
+@Table(name = "t_lvup_activity")
 @EqualsAndHashCode(of = "id")
+@Builder
 public class Activity {
 
     @Id

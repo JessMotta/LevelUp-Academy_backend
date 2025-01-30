@@ -2,10 +2,7 @@ package com.fiap.hackaton.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +11,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tb_teacher")
+@Table(name = "t_lvup_teacher")
 @EqualsAndHashCode(of = "id")
+@Builder
 public class Teacher {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
