@@ -8,7 +8,8 @@ CREATE TABLE IF NOT EXISTS t_lvup_activity (
     answer TEXT,
     execution VARCHAR(50) NOT NULL,
     prestige_value INTEGER NOT NULL,
-    value_received INTEGER,
+    experience_received INTEGER,
+    completed BOOLEAN NOT NULL,
     classroom_id BIGINT,
     FOREIGN KEY (classroom_id) REFERENCES t_lvup_classroom(id) ON DELETE CASCADE
 );
