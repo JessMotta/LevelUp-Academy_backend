@@ -30,10 +30,8 @@ public class Activity {
     private String answer;
     @Enumerated(EnumType.STRING)
     private Execution execution;
-    // TODO: Mudar para value
     private Integer prestigeValue;
-    // TODO: Mudar para experienceReceived
-    private Integer valueReceived;
+    private Integer experienceReceived;
     private boolean completed;
 
     @ManyToOne
@@ -48,6 +46,7 @@ public class Activity {
         this.studentsPerGroup = request.studentsPerGroup();
         this.execution = request.execution();
         this.prestigeValue = request.prestigeValue();
+        this.completed = false;
     }
 
     public void update(ActivityRequest request) {
