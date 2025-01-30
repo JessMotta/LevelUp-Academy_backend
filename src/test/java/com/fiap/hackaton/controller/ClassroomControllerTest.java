@@ -7,6 +7,7 @@ import com.fiap.hackaton.domain.dto.user.UserRequest;
 import com.fiap.hackaton.domain.entity.Classroom;
 import com.fiap.hackaton.domain.entity.Teacher;
 import com.fiap.hackaton.domain.entity.User;
+import com.fiap.hackaton.domain.enums.DayOfWeek;
 import com.fiap.hackaton.service.ClassroomService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -53,7 +54,7 @@ class ClassroomControllerTest {
 
         classroomRequest = new ClassroomRequest(
                 "Matemática",
-                1,
+                DayOfWeek.SEGUNDA_FEIRA,
                 1
         );
         classroom = new Classroom(classroomRequest);
