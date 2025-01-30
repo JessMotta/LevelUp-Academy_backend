@@ -6,7 +6,7 @@ public enum Patents {
     MONITOR("Monitor"),
     ASSISTENTE("Assistente"),
     EXPLORADOR("Explorador"),
-    LIDER("Lider"),
+    CIENTISTA("Cientista"),
     ESPECIALISTA("Especialista");
 
     private String patent;
