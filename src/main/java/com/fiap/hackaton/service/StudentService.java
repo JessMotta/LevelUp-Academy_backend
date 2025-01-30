@@ -8,7 +8,7 @@ import com.fiap.hackaton.domain.entity.Student;
 import java.util.List;
 
 public interface StudentService {
-    StudentResponse create(Long userId);
+    StudentResponse create(Long userId, String grade);
     StudentResponse findById(Long id);
     List<ListStudentResponse> findAll();
     void delete(Long id);

@@ -26,12 +26,13 @@ public class StudentServiceImpl implements StudentService {
     private final UserService userService;
 
     @Override
-    public StudentResponse create(Long userId) {
+    public StudentResponse create(Long userId, String grade) {
         log.info("[StudentServiceImpl] Criando estudante para o usuário com ID: {}", userId);
         User user = this.userService.findUserEntityById(userId);
 
         Student student = Student.builder()
                 .user(user)
+                .grade(grade)
                 .experiencePoints(0)
                 .build();
         this.userService.updateRole(userId, Roles.STUDENT);

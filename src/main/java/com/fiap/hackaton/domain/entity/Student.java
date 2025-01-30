@@ -19,7 +19,7 @@ public class Student {
     private Integer experiencePoints;
     @Enumerated(EnumType.STRING)
     private Patents currentPatent;
-    // TODO: adicionar ano letivo do aluno
+    private String grade;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")

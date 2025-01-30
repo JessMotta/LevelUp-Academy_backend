@@ -35,9 +35,9 @@ public class StudentController {
             @ApiResponse(responseCode = "404", description = "Sala de aula não encontrada")
     })
     @PostMapping("{userId}")
-    public ResponseEntity<StudentResponse> create(@PathVariable Long userId, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<StudentResponse> create(@PathVariable Long userId, @RequestParam("grade") String grade, UriComponentsBuilder uriBuilder) {
         log.info("[StudentController] Recebida requisição para criar um novo aluno.");
-        var response = this.service.create(userId);
+        var response = this.service.create(userId, grade);
         URI uri = uriBuilder.path("/student/{id}").buildAndExpand(response.id()).toUri();
         return ResponseEntity.created(uri).body(response);
     }
