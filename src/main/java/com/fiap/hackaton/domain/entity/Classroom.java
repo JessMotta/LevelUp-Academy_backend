@@ -2,11 +2,9 @@ package com.fiap.hackaton.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fiap.hackaton.domain.dto.classroom.ClassroomRequest;
+import com.fiap.hackaton.domain.enums.DayOfWeek;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,15 +13,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tb_classroom")
+@Table(name = "t_lvup_classroom")
 @EqualsAndHashCode(of = "id")
+@Builder
 public class Classroom {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String subject;
-    private Integer dayOfWeek;
+    private DayOfWeek dayOfWeek;
     private Integer timeSpot;
 
     @JsonBackReference
