@@ -19,6 +19,7 @@ public class Student {
     private Integer experiencePoints;
     @Enumerated(EnumType.STRING)
     private Patents currentPatent;
+    // TODO: adicionar ano letivo do aluno
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
@@ -34,20 +35,20 @@ public class Student {
     }
 
     public void verifyPatent() {
-        if (this.experiencePoints >= 15000) {
+        if (this.experiencePoints >= 17280) {
             this.currentPatent = Patents.ESPECIALISTA;
-        } else if(this.experiencePoints >= 12000) {
-            this.currentPatent = Patents.LIDER;
-        } else if(this.experiencePoints >= 8000) {
+        } else if(this.experiencePoints >= 13440) {
+            this.currentPatent = Patents.CIENTISTA;
+        } else if(this.experiencePoints >= 10080) {
             this.currentPatent = Patents.EXPLORADOR;
-        } else if(this.experiencePoints >= 5000) {
+        } else if(this.experiencePoints >= 6720) {
             this.currentPatent = Patents.ASSISTENTE;
-        } else if(this.experiencePoints >= 2500) {
+        } else if(this.experiencePoints >= 3840) {
             this.currentPatent = Patents.MONITOR;
-        } else if(this.experiencePoints >= 1000) {
-            this.currentPatent = Patents.INICIANTE;
-        } else {
+        } else if(this.experiencePoints >= 1920) {
             this.currentPatent = Patents.APRENDIZ;
+        } else {
+            this.currentPatent = Patents.INICIANTE;
         }
     }
 

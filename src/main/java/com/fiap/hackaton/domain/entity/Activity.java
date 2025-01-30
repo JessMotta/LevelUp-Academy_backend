@@ -30,8 +30,11 @@ public class Activity {
     private String answer;
     @Enumerated(EnumType.STRING)
     private Execution execution;
+    // TODO: Mudar para value
     private Integer prestigeValue;
+    // TODO: Mudar para experienceReceived
     private Integer valueReceived;
+    private boolean completed;
 
     @ManyToOne
     @JoinColumn(name = "classroom_id")
