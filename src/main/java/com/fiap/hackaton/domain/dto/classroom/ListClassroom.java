@@ -5,14 +5,14 @@ import com.fiap.hackaton.domain.entity.Classroom;
 public record ListClassroom(
         Long id,
         String subject,
-        Integer dayOfWeek,
+        String dayOfWeek,
         Integer timeSpot
 ) {
     public ListClassroom(Classroom classroom) {
         this(
                 classroom.getId(),
                 classroom.getSubject(),
-                classroom.getDayOfWeek(),
+                classroom.getDayOfWeek().getDescription(),
                 classroom.getTimeSpot()
         );
     }

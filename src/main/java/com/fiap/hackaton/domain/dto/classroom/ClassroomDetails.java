@@ -9,7 +9,7 @@ import java.util.List;
 public record ClassroomDetails(
         Long id,
         String subject,
-        Integer dayOfWeek,
+        String dayOfWeek,
         Integer timeSpot,
         String teacherName,
         List<StudentClassroom> students,
@@ -19,7 +19,7 @@ public record ClassroomDetails(
         this(
                 classroom.getId(),
                 classroom.getSubject(),
-                classroom.getDayOfWeek(),
+                classroom.getDayOfWeek().getDescription(),
                 classroom.getTimeSpot(),
                 classroom.getTeacher().getUser().getName(),
                 classroom.getStudents() != null

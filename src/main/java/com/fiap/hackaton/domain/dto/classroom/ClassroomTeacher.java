@@ -8,7 +8,7 @@ import java.util.List;
 
 public record ClassroomTeacher(
         String subject,
-        Integer dayOfWeek,
+        String dayOfWeek,
         Integer timeSpot,
         List<StudentClassroom> students,
         List<ActivityClassroom> activities
@@ -16,7 +16,7 @@ public record ClassroomTeacher(
     public ClassroomTeacher(Classroom classroom) {
         this(
                 classroom.getSubject(),
-                classroom.getDayOfWeek(),
+                classroom.getDayOfWeek().getDescription(),
                 classroom.getTimeSpot(),
                 classroom.getStudents()
                         .stream()
