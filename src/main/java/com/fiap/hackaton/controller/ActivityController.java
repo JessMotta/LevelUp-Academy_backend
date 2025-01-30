@@ -2,6 +2,7 @@ package com.fiap.hackaton.controller;
 
 import com.fiap.hackaton.domain.dto.activity.ActivityRequest;
 import com.fiap.hackaton.domain.dto.activity.ActivityResponse;
+import com.fiap.hackaton.domain.dto.activity.ListActivitiesResponse;
 import com.fiap.hackaton.service.ActivityService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -34,6 +37,17 @@ public class ActivityController {
     public ResponseEntity<Long> create(@PathVariable Long classroomId, @RequestBody ActivityRequest request) {
         log.info("[ActivityController] Recebida requisição para criar uma nova atividade.");
         var response = this.activityService.createActivity(classroomId, request);
+        return ResponseEntity.ok(response);
+    }
+
+    @Operation(summary = "Lista todas as atividades", description = "Lista todas as atividades")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Atividades listadas com sucesso")
+    })
+    @GetMapping
+    public ResponseEntity<List<ListActivitiesResponse>> listActivities() {
+        log.info("[ActivityController] Recebida requisição para listar todas as atividades.");
+        var response = this.activityService.listActivities();
         return ResponseEntity.ok(response);
     }
 

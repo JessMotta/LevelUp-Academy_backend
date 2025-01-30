@@ -2,6 +2,7 @@ package com.fiap.hackaton.service.impl;
 
 import com.fiap.hackaton.domain.dto.activity.ActivityRequest;
 import com.fiap.hackaton.domain.dto.activity.ActivityResponse;
+import com.fiap.hackaton.domain.dto.activity.ListActivitiesResponse;
 import com.fiap.hackaton.domain.entity.Activity;
 import com.fiap.hackaton.domain.entity.Classroom;
 import com.fiap.hackaton.domain.entity.Student;
@@ -16,6 +17,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -45,6 +48,15 @@ public class ActivityServiceImpl implements ActivityService {
     public ActivityResponse findActivityById(Long id) {
         Activity activity = this.findActivityEntityById(id);
         return new ActivityResponse(activity);
+    }
+
+    @Override
+    public List<ListActivitiesResponse> listActivities() {
+        log.info("[ActivityServiceImpl] Listando todas as atividades");
+        return this.repository.findAll()
+                .stream()
+                .map(ListActivitiesResponse::new)
+                .toList();
     }
 
     @Override
@@ -90,7 +102,7 @@ public class ActivityServiceImpl implements ActivityService {
         Student student = this.studentService.findStudentEntityById(studentId);
 
         student.addExperiencePoints(valueReceived);
-        activity.setValueReceived(valueReceived);
+        activity.setExperienceReceived(valueReceived);
 
         student.verifyPatent();
     }
