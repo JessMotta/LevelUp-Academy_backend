@@ -1,12 +1,29 @@
 version: '3.8'
 
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    environment:
+      POSTGRES_HOST: db
+      SPRING_PROFILE: prod
+    env_file:
+      - .env
+    depends_on:
+      - db
+    networks:
+      - db_network
   db:
     image: "postgres:16-alpine"
     ports:
       - "5432:5432"
     env_file:
       - .env
+    networks:
+      - db_network
     volumes:
       - db:/var/lib/postgresql/data
 
@@ -20,8 +37,14 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: password
+    networks:
+      - db_network
     volumes:
       - pgadmin:/var/lib/pgadmin
+
+networks:
+  db_network:
+    driver: bridge
 
 volumes:
   db:
