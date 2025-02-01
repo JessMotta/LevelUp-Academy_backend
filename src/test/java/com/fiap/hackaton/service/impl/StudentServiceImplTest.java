@@ -139,19 +139,19 @@ class StudentServiceImplTest {
 
         studentService.addStudentToClassroom(student.getId(), classroom);
 
-        assertEquals(classroom, student.getClassroom());
+        assertEquals(classroom, student.getClassrooms().get(0));
     }
 
     @Test
     @DisplayName("Should remove student from classroom")
     void removeStudentFromClassroom_ShouldRemoveStudentFromClassroom() {
         Classroom classroom = new Classroom();
-        student.setClassroom(classroom);
+        student.setClassrooms(List.of(classroom));
         when(repository.findById(student.getId())).thenReturn(Optional.of(student));
 
         studentService.removeStudentFromClassroom(student.getId(), classroom);
 
-        assertNull(student.getClassroom());
+        assertEquals(0, student.getClassrooms().size());
     }
 
 }

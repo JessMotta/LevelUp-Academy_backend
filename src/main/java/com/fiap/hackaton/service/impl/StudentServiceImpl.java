@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -97,14 +98,19 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void addStudentToClassroom(Long studentId, Classroom classroom) {
         Student student = this.findStudentEntityById(studentId);
-        student.setClassroom(classroom);
+        student.setClassrooms(List.of(classroom));
     }
 
     @Transactional
     @Override
     public void removeStudentFromClassroom(Long studentId, Classroom classroom) {
         Student student = this.findStudentEntityById(studentId);
-        student.setClassroom(null);
+
+        List<Classroom> mutableClassrooms = new ArrayList<>(student.getClassrooms());
+
+        if (mutableClassrooms.remove(classroom)) {
+            student.setClassrooms(mutableClassrooms); // Atualiza a lista no objeto Student
+        }
     }
 }
 
