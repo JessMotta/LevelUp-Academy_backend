@@ -31,10 +31,11 @@ public class Classroom {
     private Teacher teacher;
 
     @OneToMany(mappedBy = "classroom")
+    private List<Activity> activities;
+
+    @ManyToMany(mappedBy = "classrooms")
     private List<Student> students;
 
-    @OneToMany(mappedBy = "classroom")
-    private List<Activity> activities;
 
     public Classroom(ClassroomRequest request) {
         this.subject = request.subject();

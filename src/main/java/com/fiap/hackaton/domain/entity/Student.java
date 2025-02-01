@@ -5,6 +5,8 @@ import com.fiap.hackaton.domain.enums.Patents;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,10 +27,12 @@ public class Student {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "classroom_id")
-    private Classroom classroom;
+    @ManyToMany
+    @JoinTable(name = "t_lvup_student_classroom",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "classroom_id")
+    )
+    private List<Classroom> classrooms;
 
     public void addExperiencePoints(Integer points) {
         this.experiencePoints += points;
