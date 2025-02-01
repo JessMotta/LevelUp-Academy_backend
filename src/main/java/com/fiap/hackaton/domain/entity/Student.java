@@ -38,21 +38,28 @@ public class Student {
         this.experiencePoints += points;
     }
 
-    public void verifyPatent() {
+    public int verifyPatent() {
         if (this.experiencePoints >= 17280) {
             this.currentPatent = Patents.ESPECIALISTA;
-        } else if(this.experiencePoints >= 13440) {
+            return 0;
+        } else if (this.experiencePoints >= 13440) {
             this.currentPatent = Patents.CIENTISTA;
-        } else if(this.experiencePoints >= 10080) {
+            return 17280 - this.experiencePoints;
+        } else if (this.experiencePoints >= 10080) {
             this.currentPatent = Patents.EXPLORADOR;
-        } else if(this.experiencePoints >= 6720) {
+            return 13440 - this.experiencePoints;
+        } else if (this.experiencePoints >= 6720) {
             this.currentPatent = Patents.ASSISTENTE;
-        } else if(this.experiencePoints >= 3840) {
+            return 10080 - this.experiencePoints;
+        } else if (this.experiencePoints >= 3840) {
             this.currentPatent = Patents.MONITOR;
-        } else if(this.experiencePoints >= 1920) {
+            return 6720 - this.experiencePoints;
+        } else if (this.experiencePoints >= 1920) {
             this.currentPatent = Patents.APRENDIZ;
+            return 3840 - this.experiencePoints;
         } else {
             this.currentPatent = Patents.INICIANTE;
+            return 1920 - this.experiencePoints;
         }
     }
 

@@ -9,8 +9,9 @@ public record StudentResponse(
         Long id,
         String name,
         String email,
-        Integer experiencePoints,
         String currentPatent,
+        Integer experiencePoints,
+        Integer nextPatentExperience,
         List<ClassroomStudent> classrooms
 ) {
     public StudentResponse (Student student) {
@@ -18,8 +19,9 @@ public record StudentResponse(
                 student.getId(),
                 student.getUser().getName(),
                 student.getUser().getEmail(),
-                student.getExperiencePoints(),
                 student.getCurrentPatent().name(),
+                student.getExperiencePoints(),
+                student.verifyPatent(),
                 student.getClassrooms() != null
                         ? student.getClassrooms()
                         .stream()
