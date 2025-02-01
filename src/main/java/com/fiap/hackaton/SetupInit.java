@@ -108,7 +108,7 @@ public class SetupInit implements CommandLineRunner {
                     .experiencePoints(0)
                     .currentPatent(Patents.INICIANTE)
                     .grade("1º ano A")
-                    .classroom(classroom)
+                    .classrooms(List.of(classroom))
                     .build();
 
             this.studentRepository.save(student);
