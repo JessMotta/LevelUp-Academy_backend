@@ -44,22 +44,22 @@ public class Student {
             return 0;
         } else if (this.experiencePoints >= 13440) {
             this.currentPatent = Patents.CIENTISTA;
-            return 17280 - this.experiencePoints;
+            return 17280;
         } else if (this.experiencePoints >= 10080) {
             this.currentPatent = Patents.EXPLORADOR;
-            return 13440 - this.experiencePoints;
+            return 13440;
         } else if (this.experiencePoints >= 6720) {
             this.currentPatent = Patents.ASSISTENTE;
-            return 10080 - this.experiencePoints;
+            return 10080;
         } else if (this.experiencePoints >= 3840) {
             this.currentPatent = Patents.MONITOR;
-            return 6720 - this.experiencePoints;
+            return 6720;
         } else if (this.experiencePoints >= 1920) {
             this.currentPatent = Patents.APRENDIZ;
-            return 3840 - this.experiencePoints;
+            return 3840;
         } else {
             this.currentPatent = Patents.INICIANTE;
-            return 1920 - this.experiencePoints;
+            return 1920;
         }
     }
 
