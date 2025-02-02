@@ -22,7 +22,7 @@ class ClassroomTest {
     @DisplayName("Test classroom creation")
     void testClassroomCreation() {
         assertEquals("Math", classroom.getSubject());
-        assertEquals(1, classroom.getDayOfWeek());
+        assertEquals(DayOfWeek.SEGUNDA_FEIRA, classroom.getDayOfWeek());
         assertEquals(10, classroom.getTimeSpot());
         assertTrue(classroom.getStudents().isEmpty());
         assertTrue(classroom.getActivities().isEmpty());
@@ -35,7 +35,7 @@ class ClassroomTest {
         classroom.update(updateRequest);
 
         assertEquals("Science", classroom.getSubject());
-        assertEquals(2, classroom.getDayOfWeek());
+        assertEquals(DayOfWeek.TERCA_FEIRA, classroom.getDayOfWeek());
         assertEquals(11, classroom.getTimeSpot());
     }
 
