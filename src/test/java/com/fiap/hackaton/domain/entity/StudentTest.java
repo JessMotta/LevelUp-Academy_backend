@@ -16,64 +16,71 @@ class StudentTest {
         student = Student.builder()
                 .id(1L)
                 .experiencePoints(0)
-                .currentPatent(Patents.APRENDIZ)
+                .currentPatent(Patents.INICIANTE)
                 .build();
     }
 
     @Test
-    @DisplayName("Test verify patent - APRENDIZ to INICIANTE")
+    @DisplayName("Test verify patent - INICIANTE to APRENDIZ")
     void testVerifyPatentToIniciante() {
-        student.setExperiencePoints(1000); // Definir diretamente
-        student.verifyPatent();
-        assertEquals(Patents.INICIANTE, student.getCurrentPatent());
+        student.setExperiencePoints(1920);
+        int result = student.verifyPatent();
+        assertEquals(3840, result);
+        assertEquals(Patents.APRENDIZ, student.getCurrentPatent());
     }
 
     @Test
-    @DisplayName("Test verify patent - INICIANTE to MONITOR")
+    @DisplayName("Test verify patent - APRENDIZ to MONITOR")
     void testVerifyPatentToMonitor() {
-        student.setExperiencePoints(2500);
-        student.verifyPatent();
+        student.setExperiencePoints(3840);
+        int result = student.verifyPatent();
+        assertEquals(6720, result);
         assertEquals(Patents.MONITOR, student.getCurrentPatent());
     }
 
     @Test
     @DisplayName("Test verify patent - MONITOR to ASSISTENTE")
     void testVerifyPatentToAssistente() {
-        student.setExperiencePoints(5000);
-        student.verifyPatent();
+        student.setExperiencePoints(6720);
+        int result = student.verifyPatent();
+        assertEquals(10080, result);
         assertEquals(Patents.ASSISTENTE, student.getCurrentPatent());
     }
 
     @Test
     @DisplayName("Test verify patent - ASSISTENTE to EXPLORADOR")
     void testVerifyPatentToExplorador() {
-        student.setExperiencePoints(8000);
-        student.verifyPatent();
+        student.setExperiencePoints(10080);
+        int result = student.verifyPatent();
+        assertEquals(13440, result);
         assertEquals(Patents.EXPLORADOR, student.getCurrentPatent());
     }
 
     @Test
     @DisplayName("Test verify patent - EXPLORADOR to CIENTISTA")
     void testVerifyPatentToLider() {
-        student.setExperiencePoints(12000);
-        student.verifyPatent();
+        student.setExperiencePoints(13440);
+        int result = student.verifyPatent();
+        assertEquals(17280, result);
         assertEquals(Patents.CIENTISTA, student.getCurrentPatent());
     }
 
     @Test
     @DisplayName("Test verify patent - LIDER to ESPECIALISTA")
     void testVerifyPatentToEspecialista() {
-        student.setExperiencePoints(15000);
-        student.verifyPatent();
+        student.setExperiencePoints(17280);
+        int result = student.verifyPatent();
+        assertEquals(0, result);
         assertEquals(Patents.ESPECIALISTA, student.getCurrentPatent());
     }
 
     @Test
-    @DisplayName("Test verify patent - default case (APRENDIZ)")
+    @DisplayName("Test verify patent - Initial APRENDIZ")
     void testVerifyPatentToAprendiz() {
-        student.setExperiencePoints(500); // Valor que não está listado no switch
-        student.verifyPatent();
-        assertEquals(Patents.APRENDIZ, student.getCurrentPatent());
+        student.setExperiencePoints(0);
+        int result = student.verifyPatent();
+        assertEquals(1920, result);
+        assertEquals(Patents.INICIANTE, student.getCurrentPatent());
     }
 
 }
