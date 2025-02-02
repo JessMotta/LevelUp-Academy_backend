@@ -8,6 +8,7 @@ import java.util.List;
 public record StudentResponse(
         Long id,
         String name,
+        String grade,
         String email,
         String currentPatent,
         Integer experiencePoints,
@@ -18,6 +19,7 @@ public record StudentResponse(
         this(
                 student.getId(),
                 student.getUser().getName(),
+                student.getGrade(),
                 student.getUser().getEmail(),
                 student.getCurrentPatent().name(),
                 student.getExperiencePoints(),
