@@ -1,6 +1,7 @@
 package com.fiap.hackaton.domain.entity;
 
 import com.fiap.hackaton.domain.dto.classroom.ClassroomRequest;
+import com.fiap.hackaton.domain.enums.DayOfWeek;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ class ClassroomTest {
 
     @BeforeEach
     void setUp() {
-        ClassroomRequest request = new ClassroomRequest("Math", 1, 10);
+        ClassroomRequest request = new ClassroomRequest("Math", DayOfWeek.SEGUNDA_FEIRA, 10);
         classroom = new Classroom(request);
     }
 
@@ -30,7 +31,7 @@ class ClassroomTest {
     @Test
     @DisplayName("Test update classroom")
     void testUpdateClassroom() {
-        ClassroomRequest updateRequest = new ClassroomRequest("Science", 2, 11);
+        ClassroomRequest updateRequest = new ClassroomRequest("Science", DayOfWeek.TERCA_FEIRA, 11);
         classroom.update(updateRequest);
 
         assertEquals("Science", classroom.getSubject());
