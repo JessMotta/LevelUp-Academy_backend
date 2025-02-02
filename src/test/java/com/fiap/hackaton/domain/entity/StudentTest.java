@@ -53,11 +53,11 @@ class StudentTest {
     }
 
     @Test
-    @DisplayName("Test verify patent - EXPLORADOR to LIDER")
+    @DisplayName("Test verify patent - EXPLORADOR to CIENTISTA")
     void testVerifyPatentToLider() {
         student.setExperiencePoints(12000);
         student.verifyPatent();
-        assertEquals(Patents.LIDER, student.getCurrentPatent());
+        assertEquals(Patents.CIENTISTA, student.getCurrentPatent());
     }
 
     @Test
