@@ -4,12 +4,14 @@ import com.fiap.hackaton.domain.entity.Classroom;
 
 public record ClassroomStudent(
         Long id,
-        String name
+        String name,
+        String teacherName
 ) {
     public ClassroomStudent(Classroom classroom) {
         this(
                 classroom.getId(),
-                classroom.getSubject()
+                classroom.getSubject(),
+                classroom.getTeacher().getUser().getName()
         );
     }
 }
