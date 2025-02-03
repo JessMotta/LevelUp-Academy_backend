@@ -39,8 +39,6 @@ class ActivityControllerTest {
     @InjectMocks
     private DeliverAnswerController deliverAnswersController;
     @InjectMocks
-    private EvaluateActivityController evaluateActivityController;
-    @InjectMocks
     private DeleteActivityController deleteActivityController;
 
     private Activity activity;
@@ -105,18 +103,6 @@ class ActivityControllerTest {
         MockMultipartFile file = new MockMultipartFile("file", "answers.txt", "text/plain", "answers".getBytes());
 
         ResponseEntity<Void> response = deliverAnswersController.execute(activityId, file);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-    }
-
-    @Test
-    @DisplayName("Test evaluate activity")
-    public void testEvaluateActivity() {
-        Long activityId = 1L;
-        Long studentId = 1L;
-        Integer value = 10;
-
-        ResponseEntity<Void> response = evaluateActivityController.execute(activityId, studentId, value);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }

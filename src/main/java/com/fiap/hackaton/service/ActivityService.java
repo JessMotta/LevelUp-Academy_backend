@@ -15,6 +15,5 @@ public interface ActivityService {
     Activity findActivityEntityById(Long activityId);
     Long updateActivity(Long activityId, ActivityRequest activityRequest);
     void deliverAnswers(Long activityId, MultipartFile file);
-    void evaluateActivity(Long activityId, Long studentId, Integer valueReceived);
     void deleteActivity(Long activityId);
 }

@@ -150,22 +150,4 @@ class ActivityServiceImplTest {
         assertThrows(ImageException.class, () -> activityService.deliverAnswers(activity.getId(), file));
     }
 
-    @Test
-    @DisplayName("Should evaluate activity and add experience points to student")
-    void evaluateActivity_ShouldEvaluateActivityAndAddExperiencePointsToStudent() {
-        Student student = Student.builder()
-                .id(1L)
-                .experiencePoints(0)
-                .currentPatent(Patents.APRENDIZ)
-                .build();
-        when(repository.findById(activity.getId())).thenReturn(Optional.of(activity));
-        when(studentService.findStudentEntityById(student.getId())).thenReturn(student);
-
-        activityService.evaluateActivity(activity.getId(), student.getId(), 10);
-
-        assertEquals(10, student.getExperiencePoints());
-        assertEquals(10, activity.getExperienceReceived());
-        verify(studentService).findStudentEntityById(student.getId());
-    }
-
 }

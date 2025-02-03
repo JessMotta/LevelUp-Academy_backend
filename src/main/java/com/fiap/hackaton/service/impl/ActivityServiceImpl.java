@@ -95,18 +95,6 @@ public class ActivityServiceImpl implements ActivityService {
         log.info("[ActivityServiceImpl] Respostas salvas com sucesso para atividade com ID: {}", activityId);
     }
 
-    @Transactional
-    @Override
-    public void evaluateActivity(Long activityId, Long studentId, Integer valueReceived) {
-        Activity activity = this.findActivityEntityById(activityId);
-        Student student = this.studentService.findStudentEntityById(studentId);
-
-        student.addExperiencePoints(valueReceived);
-        activity.setExperienceReceived(valueReceived);
-
-        student.verifyPatent();
-    }
-
     @Override
     public void deleteActivity(Long activityId) {
         Activity activity = this.findActivityEntityById(activityId);
