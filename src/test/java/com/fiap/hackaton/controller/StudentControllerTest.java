@@ -1,5 +1,6 @@
 package com.fiap.hackaton.controller;
 
+import com.fiap.hackaton.controller.student.*;
 import com.fiap.hackaton.domain.dto.student.ListStudentResponse;
 import com.fiap.hackaton.domain.dto.student.StudentResponse;
 import com.fiap.hackaton.domain.dto.user.UserRequest;
@@ -10,9 +11,11 @@ import com.fiap.hackaton.service.StudentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -24,19 +27,27 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class StudentControllerTest {
 
     @Mock
     private StudentService studentService;
 
     @InjectMocks
-    private StudentController studentController;
+    private AddExperienceController addExperienceController;
+    @InjectMocks
+    private CreateStudentController createStudentController;
+    @InjectMocks
+    private DeleteStudentController deleteStudentController;
+    @InjectMocks
+    private FindStudentController findStudentController;
+    @InjectMocks
+    private ListStudentsController listStudentsController;
 
     private Student student;
 
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
         UserRequest request = new UserRequest(
                 "John Doe",
                 "johndoe@example.com",
@@ -61,7 +72,7 @@ class StudentControllerTest {
         when(studentService.create(userId, "1º Ano A")).thenReturn(studentResponse);
 
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.newInstance();
-        ResponseEntity<StudentResponse> response = studentController.create(userId, "1º Ano A", uriBuilder);
+        ResponseEntity<StudentResponse> response = createStudentController.execute(userId, "1º Ano A", uriBuilder);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(studentResponse, response.getBody());
@@ -75,7 +86,7 @@ class StudentControllerTest {
         StudentResponse studentResponse = new StudentResponse(student);
         when(studentService.findById(studentId)).thenReturn(studentResponse);
 
-        ResponseEntity<StudentResponse> response = studentController.findById(studentId);
+        ResponseEntity<StudentResponse> response = findStudentController.execute(studentId);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(studentResponse, response.getBody());
@@ -87,7 +98,7 @@ class StudentControllerTest {
         List<ListStudentResponse> students = Collections.singletonList(new ListStudentResponse(student));
         when(studentService.findAll()).thenReturn(students);
 
-        ResponseEntity<List<ListStudentResponse>> response = studentController.findAll();
+        ResponseEntity<List<ListStudentResponse>> response = listStudentsController.execute();
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(students, response.getBody());
@@ -98,7 +109,7 @@ class StudentControllerTest {
     public void testDelete() {
         Long studentId = 1L;
 
-        ResponseEntity<Void> response = studentController.delete(studentId);
+        ResponseEntity<Void> response = deleteStudentController.execute(studentId);
 
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
@@ -109,7 +120,7 @@ class StudentControllerTest {
         Long studentId = 1L;
         Integer points = 10;
 
-        ResponseEntity<Void> response = studentController.addExperiencePoints(studentId, points);
+        ResponseEntity<Void> response = addExperienceController.execute(studentId, points);
 
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
