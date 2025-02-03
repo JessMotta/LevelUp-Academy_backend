@@ -1,4 +1,4 @@
-package com.fiap.hackaton.controller;
+package com.fiap.hackaton.controller.image;
 
 import com.fiap.hackaton.service.ImageService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @Tag(name = "Image", description = "Requisições relacionadas a imagens")
-public class ImageController {
+public class FindImageController {
 
     @Autowired
     private ImageService imageService;
@@ -40,6 +40,5 @@ public class ImageController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename())
                 .body(resource);
     }
-
 
 }
