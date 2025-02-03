@@ -1,5 +1,9 @@
 package com.fiap.hackaton.controller;
 
+import com.fiap.hackaton.controller.teacher.CreateTeacherController;
+import com.fiap.hackaton.controller.teacher.DeleteTeacherController;
+import com.fiap.hackaton.controller.teacher.FindTeacherController;
+import com.fiap.hackaton.controller.teacher.ListTeacherController;
 import com.fiap.hackaton.domain.dto.teacher.ListTeacherResponse;
 import com.fiap.hackaton.domain.dto.teacher.TeacherResponse;
 import com.fiap.hackaton.domain.dto.user.UserRequest;
@@ -9,9 +13,11 @@ import com.fiap.hackaton.service.TeacherService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -23,19 +29,25 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class TeacherControllerTest {
 
     @Mock
     private TeacherService teacherService;
 
     @InjectMocks
-    private TeacherController teacherController;
+    private CreateTeacherController createTeacherController;
+    @InjectMocks
+    private DeleteTeacherController deleteTeacherController;
+    @InjectMocks
+    private FindTeacherController findTeacherController;
+    @InjectMocks
+    private ListTeacherController listTeacherController;
 
     private Teacher teacher;
 
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
         UserRequest userRequest = new UserRequest("name", "email@email.com", "password");
         teacher = new Teacher();
         teacher.setUser(new User(userRequest));
@@ -49,7 +61,7 @@ class TeacherControllerTest {
         when(teacherService.create(userId)).thenReturn(teacherId);
 
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.newInstance();
-        ResponseEntity<Long> response = teacherController.save(userId, uriBuilder);
+        ResponseEntity<Long> response = createTeacherController.execute(userId, uriBuilder);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(teacherId, response.getBody());
@@ -62,7 +74,7 @@ class TeacherControllerTest {
         List<ListTeacherResponse> teachers = Collections.singletonList(new ListTeacherResponse(teacher));
         when(teacherService.findAll()).thenReturn(teachers);
 
-        ResponseEntity<List<ListTeacherResponse>> response = teacherController.findAll();
+        ResponseEntity<List<ListTeacherResponse>> response = listTeacherController.execute();
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(teachers, response.getBody());
@@ -75,7 +87,7 @@ class TeacherControllerTest {
         TeacherResponse teacherResponse = new TeacherResponse(teacher);
         when(teacherService.findById(teacherId)).thenReturn(teacherResponse);
 
-        ResponseEntity<TeacherResponse> response = teacherController.findById(teacherId);
+        ResponseEntity<TeacherResponse> response = findTeacherController.execute(teacherId);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(teacherResponse, response.getBody());
@@ -86,7 +98,7 @@ class TeacherControllerTest {
     public void testDelete() {
         Long teacherId = 1L;
 
-        ResponseEntity<Void> response = teacherController.delete(teacherId);
+        ResponseEntity<Void> response = deleteTeacherController.execute(teacherId);
 
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
